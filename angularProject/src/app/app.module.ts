@@ -2,23 +2,26 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
+import { CoursesModule } from './main/courses/courses.module';
+import { HeaderModule } from './main/header/header.module';
+
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { FakeLogoComponent } from './components/fake-logo/fake-logo.component';
-import { CoursesPageComponent } from './components/courses-page/courses-page.component';
+import { FakeLogoComponent } from './main/fake-logo/fake-logo.component';
+import { FooterComponent } from './main/footer/footer.component';
+import { BreadcrumbsComponent } from './main/breadcrumbs/breadcrumbs.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     FooterComponent,
     FakeLogoComponent,
-    CoursesPageComponent
+    BreadcrumbsComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CoursesModule,
+    HeaderModule
   ],
   providers: [],
   bootstrap: [AppComponent]
