@@ -1,1 +1,22 @@
-<p>course-item works!</p>
+<div class="course mt-2">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9 col-md-9">
+        <div class="d-flex align-items-center justify-content-between">
+          <div>
+            <h2 class="course-title">{{ course.title }}</h2>
+          </div>
+          <div>
+            <span class="course-info">{{ course.minDuration }}</span>
+            <span class="course-info ml-3">
+                {{ course.creationDate | date: 'd, MMM y' }}</span>
+          </div>
+        </div>
+        <p>{{ course.description }}</p>
+      </div>
+      <div class="col-lg-3 col-md-3">
+        <app-course-control-buttons></app-course-control-buttons>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+.app-footer {
+  flex-shrink: 0;
+  margin-top: 0;
+}
+
+.app-body {
+  display: flex;
+  flex-direction: column;
+  min-width: 320px;
+  height: 100vh;
+}
+
+.app-content {
+  flex: 1 0 auto;
+}

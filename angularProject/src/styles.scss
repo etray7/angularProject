@@ -1,1 +1,62 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'src/assets/scss/colors.scss';
+@font-face {
+  font-family: SourceSansPro;
+  src: local(SourceSansPro-Regular),
+    url(./assets/fonts/SourceSansPro/SourceSansPro-Regular.ttf) format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+}
+@font-face {
+  font-family: SourceSansPro;
+  src: local(SourceSansPro-Semibold),
+    url(./assets/fonts/SourceSansPro/SourceSansPro-Semibold.ttf) format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+}
+@font-face {
+  font-family: SourceSansPro;
+  src: local(SourceSansPro-SemiBold),
+    url(./assets/fonts/SourceSansPro/SourceSansPro-SemiBold.ttf) format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+}
+@font-face {
+  font-family: SourceSansPro;
+  src: local(SourceSansPro-Bold),
+    url(./assets/fonts/SourceSansPro/SourceSansPro-Bold.ttf) format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  background-color: $pale-grey;
+}
+
+h2 {
+  font-family: SourceSansPro;
+  font-size: 24px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+  color: $dark;
+}
+
+p {
+  font-family: SourceSansPro;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.71;
+  letter-spacing: normal;
+  color: $slate-grey;
+}

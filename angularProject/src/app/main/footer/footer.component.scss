@@ -1,0 +1,23 @@
+.footer {
+  background-color: #414452;
+  height: 64px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  &-copyright {
+    font-family: SourceSansPro;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.71;
+    letter-spacing: normal;
+    text-align: right;
+    color: #c0c3ce;
+  }
+
+  p {
+    margin: 0;
+  }
+}

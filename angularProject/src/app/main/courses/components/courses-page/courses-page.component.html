@@ -1,1 +1,22 @@
-<p>courses-page works!</p>
+<div class="container mt-4">
+  <app-courses-search></app-courses-search>
+  <div class="d-flex mt-4 justify-content-end">
+    <button class="add-course">
+      <i class="fa fa-plus mr-1"></i>
+      <span class="add-course_text">Add course</span>
+    </button>
+  </div>
+
+  <div class="mt-2">
+    <app-course-item *ngFor="let course of listOfCourses"
+                     [course]="course">
+    </app-course-item>
+  </div>
+  <div class="mt-2">
+    <button class="load-more-btn">
+      <span>
+        Load more
+      </span>
+    </button>
+  </div>
+</div>

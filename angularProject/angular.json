@@ -28,6 +28,9 @@
               "src/assets"
             ],
             "styles": [
+              "src/assets/bootstrap4/bootstrap.min.css",
+              "src/assets/bootstrap4/bootstrap-reboot.min.css",
+              "src/assets/fonts/font-awesome/css/font-awesome.min.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -93,6 +96,8 @@
               "src/assets"
             ],
             "styles": [
+              "src/assets/bootstrap4/bootstrap.min.css",
+              "src/assets/bootstrap4/bootstrap-reboot.min.css",
               "src/styles.scss"
             ],
             "scripts": []
