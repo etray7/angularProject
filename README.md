@@ -1,1 +1,1 @@
-# use 'ng-serve' from root folder to start a project
+# use 'ng serve' to start a project
