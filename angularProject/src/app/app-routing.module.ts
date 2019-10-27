@@ -6,11 +6,12 @@ import { CoursesPageComponent } from './main/courses/components/courses-page/cou
 const routes: Routes = [
   { path: '', redirectTo: 'courses', pathMatch: 'full' },
   {
-    path: 'courses', component: CoursesPageComponent, pathMatch: 'full', children: [
-      {path: 'courses/:id', component: CoursesPageComponent }
-    ]
+    path: 'courses',
+    component: CoursesPageComponent,
+    pathMatch: 'full',
+    children: [{ path: 'courses/:id', component: CoursesPageComponent }]
   },
-  { path: '**', redirectTo: 'courses', pathMatch: 'full' },
+  { path: '**', redirectTo: 'courses', pathMatch: 'full' }
 ];
 
 @NgModule({

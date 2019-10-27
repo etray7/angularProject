@@ -5,7 +5,7 @@ export class CourseModel implements Course {
         public id: number,
         public title: string,
         public creationDate: Date,
-        public minDuration: number,
+        public minDuration: string,
         public description: string,
     ) { }
 }

@@ -1,4 +1,4 @@
-<div class="course mt-2">
+<section class="course mt-2">
   <div class="container">
     <div class="row">
       <div class="col-lg-9 col-md-9">
@@ -7,16 +7,23 @@
             <h2 class="course-title">{{ course.title }}</h2>
           </div>
           <div>
-            <span class="course-info">{{ course.minDuration }}</span>
+            <span class="course-info">
+              <i class="far fa-clock"></i>
+              {{ course.minDuration }}
+            </span>
             <span class="course-info ml-3">
-                {{ course.creationDate | date: 'd, MMM y' }}</span>
+              <i class="fas fa-calendar-alt"></i>
+              {{ course.creationDate | date: "d MMM, y" }}
+            </span>
           </div>
         </div>
         <p>{{ course.description }}</p>
       </div>
-      <div class="col-lg-3 col-md-3">
-        <app-course-control-buttons></app-course-control-buttons>
+      <div class="col-lg-3 col-md-3 d-flex align-items-center justify-content-center">
+        <app-course-control-buttons [course]="course"
+                                    (deleteCourse)="courseDelete($event)">
+        </app-course-control-buttons>
       </div>
     </div>
   </div>
-</div>
+</section>

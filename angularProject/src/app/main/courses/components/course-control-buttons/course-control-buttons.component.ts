@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { Course } from 'src/app/domain/interfaces/course.interface';
 
 @Component({
   selector: 'app-course-control-buttons',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CourseControlButtonsComponent implements OnInit {
 
+  @Input()
+  course: Course;
+  @Output()
+  deleteCourse: EventEmitter<number> = new EventEmitter<number>();
+
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
+  public emitCourseDelete(item) {
+    this.deleteCourse.emit(item);
+  }
 }
