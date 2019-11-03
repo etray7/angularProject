@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CoursesPageComponent } from './components/courses-page/courses-page.component';
 import { CourseItemComponent } from './components/course-item/course-item.component';
@@ -18,5 +18,6 @@ import { CoursesSearchComponent } from './components/courses-search/courses-sear
     CommonModule
   ],
   exports: [CoursesPageComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class CoursesModule { }

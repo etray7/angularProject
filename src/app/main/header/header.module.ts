@@ -18,7 +18,8 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
     CommonModule,
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    FakeLogoComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

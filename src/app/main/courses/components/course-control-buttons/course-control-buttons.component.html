@@ -5,7 +5,10 @@
       Edit
     </span>
   </button>
-  <button (click)="emitCourseDelete(course.id)" class="control-button ml-3" type="button">
+  <button data-marker="deleteBtn"
+          (click)="emitCourseDelete(course.id)" 
+          class="control-button ml-3" 
+          type="button">
     <i class="fas fa-trash"></i>
     <span class="ml-1">
       Delete

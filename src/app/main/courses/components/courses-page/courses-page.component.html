@@ -8,8 +8,9 @@
   </div>
 
   <section class="mt-2">
-    <app-course-item *ngFor="let course of listOfCourses"
-                     [course]="course">
+    <app-course-item data-marker="courses"
+                     *ngFor="let courseItem of listOfCourses"
+                     [course]="courseItem">
     </app-course-item>
   </section>
   <div class="mt-2">
