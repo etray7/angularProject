@@ -7,20 +7,21 @@
             <h2 class="course-title">{{ course.title }}</h2>
           </div>
           <div>
-            <span class="course-info">
+            <span data-marker='minDuration' class="course-info">
               <i class="far fa-clock"></i>
               {{ course.minDuration }}
             </span>
-            <span class="course-info ml-3">
+            <span data-marker='creationDate' class="course-info ml-3">
               <i class="fas fa-calendar-alt"></i>
               {{ course.creationDate | date: "d MMM, y" }}
             </span>
           </div>
         </div>
-        <p>{{ course.description }}</p>
+        <p data-marker="description">{{ course.description }}</p>
       </div>
       <div class="col-lg-3 col-md-3 d-flex align-items-center justify-content-center">
-        <app-course-control-buttons [course]="course"
+        <app-course-control-buttons data-marker="controlButtons"
+                                    [course]="course"
                                     (deleteCourse)="courseDelete($event)">
         </app-course-control-buttons>
       </div>

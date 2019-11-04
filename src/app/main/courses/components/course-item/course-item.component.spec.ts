@@ -2,6 +2,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseItemComponent } from './course-item.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { By } from '@angular/platform-browser';
+import { DatePipe } from '@angular/common';
+import { CourseControlButtonsComponent } from '../course-control-buttons/course-control-buttons.component';
 
 describe('CourseItemComponent', () => {
   let component: CourseItemComponent;
@@ -25,7 +28,7 @@ describe('CourseItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CourseItemComponent ],
+      declarations: [ CourseItemComponent, CourseControlButtonsComponent ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
     })
     .compileComponents();
@@ -46,5 +49,25 @@ describe('CourseItemComponent', () => {
     spyOn(component, 'courseDelete').and.callThrough();
     component.courseDelete(component.course.id);
     expect(component.courseDelete).toHaveBeenCalledWith(1);
+  });
+
+  it('should render course', () => {
+    const nativeElement = fixture.nativeElement;
+    expect(nativeElement.querySelector('.course-title').textContent).toContain(mockCourseItem.title);
+    expect(nativeElement.querySelector('[data-marker="creationDate"]').textContent)
+      .toContain(new DatePipe('en-US').transform(mockCourseItem.creationDate, 'd MMM, y'));
+    expect(nativeElement.querySelector('[data-marker="minDuration"]').textContent)
+      .toContain(mockCourseItem.minDuration);
+    expect(nativeElement.querySelector('[data-marker="description"]').textContent)
+      .toContain(mockCourseItem.description);
+    expect(nativeElement.querySelectorAll('[data-marker="controlButtons"]')[0].children[0].children.length)
+      .toEqual(2);
+    expect(fixture.debugElement.query(By.css('.course'))).toBeTruthy();
+  });
+
+  it('should emit delete', () => {
+    spyOn(component.deleteCourseItem, 'emit');
+    component.courseDelete(mockCourseItem.id);
+    expect(component.deleteCourseItem.emit).toHaveBeenCalled();
   });
 });
