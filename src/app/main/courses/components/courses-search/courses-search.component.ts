@@ -18,14 +18,13 @@ export class CoursesSearchComponent {
     return this.searchForm.controls.search.value;
   }
 
-  formBuilder() {
+  formBuilder(): void {
     this.searchForm = new FormGroup({
       search: new FormControl(''),
     });
   }
 
   onFilterCourses() {
-    console.log(this.search)
     this.filterCourseEmit.emit(this.search);
   }
 }

@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CoursesPageComponent } from './courses-page.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { OrderByPipe } from 'src/app/pipes/order-by.pipe';
 
 describe('CoursesPageComponent', () => {
   let component: CoursesPageComponent;
@@ -10,7 +11,8 @@ describe('CoursesPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CoursesPageComponent ],
+      declarations: [ CoursesPageComponent, OrderByPipe ],
+      providers: [ OrderByPipe ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
     })
     .compileComponents();
@@ -28,6 +30,6 @@ describe('CoursesPageComponent', () => {
 
   it('should show courses', () => {
     const courses = fixture.debugElement.queryAll(By.css('[data-marker="courses"]')).length;
-    expect(component.listOfCourses.length).toEqual(courses);
+    expect(component.showCourses.length).toEqual(courses);
   });
 });

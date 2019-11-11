@@ -5,6 +5,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { DatePipe } from '@angular/common';
 import { CourseControlButtonsComponent } from '../course-control-buttons/course-control-buttons.component';
+import { DurationPipe } from 'src/app/pipes/duration.pipe';
+import { CourseViewDirective } from 'src/app/directives/course-view.directive';
 
 describe('CourseItemComponent', () => {
   let component: CourseItemComponent;
@@ -14,7 +16,7 @@ describe('CourseItemComponent', () => {
     id: 1,
     title: 'Video Course 1. Name tag',
     creationDate: new Date(),
-    minDuration: '1h 30 min',
+    minDuration: 30,
     description: `Learn about where you can find course descriptions,
         what information they include, how they work, and details about
         various components of a course description.
@@ -28,10 +30,10 @@ describe('CourseItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CourseItemComponent, CourseControlButtonsComponent ],
-      schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
-    })
-    .compileComponents();
+      declarations: [CourseItemComponent, CourseControlButtonsComponent, DurationPipe, CourseViewDirective],
+      providers: [DurationPipe],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -53,11 +55,11 @@ describe('CourseItemComponent', () => {
 
   it('should render course', () => {
     const nativeElement = fixture.nativeElement;
-    expect(nativeElement.querySelector('.course-title').textContent).toContain(mockCourseItem.title);
+    expect(nativeElement.querySelector('.course-title').textContent).toContain(mockCourseItem.title.toUpperCase());
     expect(nativeElement.querySelector('[data-marker="creationDate"]').textContent)
       .toContain(new DatePipe('en-US').transform(mockCourseItem.creationDate, 'd MMM, y'));
-    expect(nativeElement.querySelector('[data-marker="minDuration"]').textContent)
-      .toContain(mockCourseItem.minDuration);
+    expect(nativeElement.querySelector('[data-marker="minDuration"]').textContent.trim())
+      .toEqual(mockCourseItem.minDuration + 'min');
     expect(nativeElement.querySelector('[data-marker="description"]').textContent)
       .toContain(mockCourseItem.description);
     expect(nativeElement.querySelectorAll('[data-marker="controlButtons"]')[0].children[0].children.length)
