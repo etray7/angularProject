@@ -10,8 +10,9 @@ describe('CourseControlButtonsComponent', () => {
   const mockCourseItem = {
     id: 1,
     title: 'Video Course 1. Name tag',
+    topRated: true,
     creationDate: new Date(),
-    minDuration: '1h 30 min',
+    minDuration: 200,
     description: `Learn about where you can find course descriptions,
         what information they include, how they work, and details about
         various components of a course description.

@@ -1,5 +1,19 @@
 @import "../../../../../assets/scss/colors.scss";
 
+.star {
+  color: white;
+  font-size: 11px;
+  line-height: 2.7em;
+  vertical-align: top;
+}
+
+.topRated {
+  background-color: #414452 !important;
+  h2, p, span {
+    color: white !important;
+  }
+}
+
 .course {
   border-radius: 8px;
   box-shadow: 0 1px 24px 0 rgba(18, 21, 35, 0.08);

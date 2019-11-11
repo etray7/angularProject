@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <app-courses-search></app-courses-search>
+  <app-courses-search (filterCourseEmit)="onFilterCourses($event)"></app-courses-search>
   <div class="d-flex mt-4 justify-content-end">
     <button class="add-course">
       <i class="fa fa-plus mr-1"></i>
@@ -8,10 +8,17 @@
   </div>
 
   <section class="mt-2">
-    <app-course-item data-marker="courses"
-                     *ngFor="let courseItem of listOfCourses"
-                     [course]="courseItem">
-    </app-course-item>
+    <ng-container *ngIf="showCourses.length > 0; else noMessage">
+      <app-course-item data-marker="courses"
+                       *ngFor="let courseItem of showCourses"
+                       [course]="courseItem">
+      </app-course-item>
+    </ng-container>
+    <ng-template #noMessage>
+      <div class="d-flex justify-content-center no-data">
+        No data. Feel free to add new course
+      </div>
+    </ng-template>
   </section>
   <div class="mt-2">
     <button class="load-more-btn">

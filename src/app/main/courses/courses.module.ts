@@ -4,7 +4,9 @@ import { CoursesPageComponent } from './components/courses-page/courses-page.com
 import { CourseItemComponent } from './components/course-item/course-item.component';
 import { CourseControlButtonsComponent } from './components/course-control-buttons/course-control-buttons.component';
 import { CoursesSearchComponent } from './components/courses-search/courses-search.component';
-
+import { CourseViewDirective } from 'src/app/directives/course-view.directive';
+import { DurationPipePipe } from 'src/app/pipes/duration-pipe.pipe';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -12,10 +14,14 @@ import { CoursesSearchComponent } from './components/courses-search/courses-sear
     CoursesPageComponent,
     CourseItemComponent,
     CourseControlButtonsComponent,
-    CoursesSearchComponent
+    CoursesSearchComponent,
+    CourseViewDirective,
+    DurationPipePipe,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [CoursesPageComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
