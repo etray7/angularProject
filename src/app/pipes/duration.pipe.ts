@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'durationPipe'
+  name: 'duration'
 })
-export class DurationPipePipe implements PipeTransform {
+export class DurationPipe implements PipeTransform {
 
   transform(value: any, ...args: any[]): any {
     const hours = (value / 60).toFixed();

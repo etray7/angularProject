@@ -5,8 +5,9 @@ import { CourseItemComponent } from './components/course-item/course-item.compon
 import { CourseControlButtonsComponent } from './components/course-control-buttons/course-control-buttons.component';
 import { CoursesSearchComponent } from './components/courses-search/courses-search.component';
 import { CourseViewDirective } from 'src/app/directives/course-view.directive';
-import { DurationPipePipe } from 'src/app/pipes/duration-pipe.pipe';
+import { DurationPipe } from 'src/app/pipes/duration.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { OrderByPipe } from 'src/app/pipes/order-by.pipe';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CourseControlButtonsComponent,
     CoursesSearchComponent,
     CourseViewDirective,
-    DurationPipePipe,
+    DurationPipe,
+    OrderByPipe
   ],
   imports: [
     CommonModule,

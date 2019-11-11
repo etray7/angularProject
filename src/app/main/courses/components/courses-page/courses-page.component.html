@@ -10,9 +10,16 @@
   <section class="mt-2">
     <ng-container *ngIf="showCourses.length > 0; else noMessage">
       <app-course-item data-marker="courses"
-                       *ngFor="let courseItem of showCourses"
+                       *ngFor="let courseItem of showCourses | orderBy: 'creationDate'"
                        [course]="courseItem">
       </app-course-item>
+      <div class="mt-2">
+        <button class="load-more-btn">
+          <span>
+            Load more
+          </span>
+        </button>
+      </div>
     </ng-container>
     <ng-template #noMessage>
       <div class="d-flex justify-content-center no-data">
@@ -20,11 +27,4 @@
       </div>
     </ng-template>
   </section>
-  <div class="mt-2">
-    <button class="load-more-btn">
-      <span>
-        Load more
-      </span>
-    </button>
-  </div>
 </div>
