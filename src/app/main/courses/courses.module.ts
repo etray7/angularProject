@@ -8,6 +8,8 @@ import { CourseViewDirective } from 'src/app/directives/course-view.directive';
 import { DurationPipe } from 'src/app/pipes/duration.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrderByPipe } from 'src/app/pipes/order-by.pipe';
+import { ModalAcceptComponent } from './components/modal-accept/modal-accept.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -18,14 +20,17 @@ import { OrderByPipe } from 'src/app/pipes/order-by.pipe';
     CoursesSearchComponent,
     CourseViewDirective,
     DurationPipe,
-    OrderByPipe
+    OrderByPipe,
+    ModalAcceptComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule,
   ],
   exports: [CoursesPageComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  entryComponents: [ModalAcceptComponent]
 })
 export class CoursesModule { }

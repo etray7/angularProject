@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { CoursesModule } from './main/courses/courses.module';
 import { HeaderModule } from './main/header/header.module';
 import { FooterComponent } from './main/footer/footer.component';
+import { LoginPageModule } from './main/login-page/login-page.module';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -11,13 +12,13 @@ describe('AppComponent', () => {
       imports: [
         RouterTestingModule,
         CoursesModule,
-        HeaderModule
+        HeaderModule,
+        LoginPageModule
       ],
       declarations: [
         AppComponent,
-        FooterComponent
+        FooterComponent,
       ],
-
     }).compileComponents();
   }));
 
@@ -25,11 +26,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'angularProject'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('angularProject');
   });
 });

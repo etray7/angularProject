@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Delete course?</h2>
+<form (keydown.escape)="closeModal()" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <div class="form-group">
+      <label class="message">
+        {{ data.message + " " + data.course.title }}?
+      </label>
+    </div>
+  </mat-dialog-content>
+  <div class="d-flex justify-content-end">
+    <button type="button" class="closeBtn" mat-dialog-close>Cancel</button>
+    <button type="submit" class="acceptBtn ml-2">Yes, delete</button>
+  </div>
+</form>

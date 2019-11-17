@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { Course } from 'src/app/domain/interfaces/course.interface';
-
+import { MatDialog } from '@angular/material/dialog';
+import { ModalAcceptComponent } from '../modal-accept/modal-accept.component';
 @Component({
   selector: 'app-course-control-buttons',
   templateUrl: './course-control-buttons.component.html',
@@ -13,11 +14,25 @@ export class CourseControlButtonsComponent implements OnInit {
   @Output()
   deleteCourse: EventEmitter<number> = new EventEmitter<number>();
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit() {}
 
-  public emitCourseDelete(item) {
-    this.deleteCourse.emit(item);
+  openDialog(course: Course): void {
+    const dialogRef = this.dialog.open(ModalAcceptComponent, {
+      width: '450px',
+      data: {
+        course,
+        message: 'Are you sure you want to delete'
+      },
+      hasBackdrop: true,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (!result) {
+        return;
+      }
+      this.deleteCourse.emit(course.id);
+    });
   }
 }

@@ -7,6 +7,8 @@ import { DatePipe } from '@angular/common';
 import { CourseControlButtonsComponent } from '../course-control-buttons/course-control-buttons.component';
 import { DurationPipe } from 'src/app/pipes/duration.pipe';
 import { CourseViewDirective } from 'src/app/directives/course-view.directive';
+import { MatDialog } from '@angular/material/dialog';
+import { of } from 'rxjs';
 
 describe('CourseItemComponent', () => {
   let component: CourseItemComponent;
@@ -31,7 +33,13 @@ describe('CourseItemComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [CourseItemComponent, CourseControlButtonsComponent, DurationPipe, CourseViewDirective],
-      providers: [DurationPipe],
+      providers: [
+        DurationPipe,
+        { 
+          provide: MatDialog,
+          useValue: {}
+        },
+      ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
   }));

@@ -8,6 +8,9 @@ import { HeaderModule } from './main/header/header.module';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './main/footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { LoginPageModule } from './main/login-page/login-page.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CoursesModule,
     HeaderModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    LoginPageModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

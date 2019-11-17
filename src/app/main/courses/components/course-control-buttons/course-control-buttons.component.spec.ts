@@ -2,6 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseControlButtonsComponent } from './course-control-buttons.component';
 import { By } from '@angular/platform-browser';
+import { MatDialog } from '@angular/material/dialog';
+import { of } from 'rxjs';
 
 describe('CourseControlButtonsComponent', () => {
   let component: CourseControlButtonsComponent;
@@ -23,10 +25,23 @@ describe('CourseControlButtonsComponent', () => {
         course schedules that contain descriptions
         for all courses offered during a particular semester.`
   };
+  const mockDialog = {
+    open: () => {
+      return {
+        afterClosed: () => of(true),
+      };
+    }
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CourseControlButtonsComponent ]
+      declarations: [ CourseControlButtonsComponent ],
+      providers: [
+        {
+          provide: MatDialog,
+          useValue: mockDialog,
+        },
+      ],
     })
     .compileComponents();
   }));
@@ -43,7 +58,7 @@ describe('CourseControlButtonsComponent', () => {
   });
 
   it('should called emitCourseDelete function when click on button', () => {
-    spyOn(component.deleteCourse, 'emit').and.callThrough();
+    spyOn(component.deleteCourse, 'emit');
     const deleteBtn = fixture.debugElement
       .query(By.css('[data-marker="deleteBtn"]'))
       .nativeElement;
