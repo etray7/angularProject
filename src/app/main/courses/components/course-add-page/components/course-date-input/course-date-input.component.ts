@@ -14,13 +14,13 @@ export class CourseDateInputComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.date = `${this.creationDate.getFullYear()}-${this.creationDate.getMonth() + 1}-${this.creationDate.getDate()}`;
+    if (this.creationDate) {
+      this.date = `${this.creationDate.getFullYear()}-${this.creationDate.getMonth() + 1}-${this.creationDate.getDate()}`;
+    }
   }
 
   onDateChange() {
     const date = new Date(this.date);
-    // const reformDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-    // console.log(reformDate);
     this.dateChange.emit(date);
   }
 }

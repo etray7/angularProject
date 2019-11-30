@@ -4,6 +4,7 @@ import { CourseControlButtonsComponent } from './course-control-buttons.componen
 import { By } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material/dialog';
 import { of } from 'rxjs';
+import { Router } from '@angular/router';
 
 describe('CourseControlButtonsComponent', () => {
   let component: CourseControlButtonsComponent;
@@ -41,6 +42,10 @@ describe('CourseControlButtonsComponent', () => {
           provide: MatDialog,
           useValue: mockDialog,
         },
+        {
+          provide: Router,
+          useValue: {}
+        }
       ],
     })
     .compileComponents();

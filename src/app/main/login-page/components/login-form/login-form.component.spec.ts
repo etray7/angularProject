@@ -3,6 +3,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { LoginFormComponent } from './login-form.component';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 describe('LoginFormComponent', () => {
   let component: LoginFormComponent;
@@ -12,7 +13,8 @@ describe('LoginFormComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ LoginFormComponent ],
       imports: [ FormsModule ],
-      schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+      providers: [{ provide: Router, useValue: {} }]
     })
     .compileComponents();
   }));

@@ -40,6 +40,6 @@ export class CourseControlButtonsComponent implements OnInit {
   editCourse(course: Course) {
     this.router.navigateByUrl(`courses/${course.id}`, {
       queryParams: { ...course },
-    })
+    });
   }
 }

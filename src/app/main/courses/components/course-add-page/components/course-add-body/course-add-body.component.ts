@@ -11,6 +11,7 @@ import { Course } from 'src/app/domain/interfaces/course.interface';
 })
 export class CourseAddBodyComponent implements OnInit, OnDestroy {
 
+  manageCourse: string;
   newIndex: number;
   mode: string;
   description: string;
@@ -28,9 +29,11 @@ export class CourseAddBodyComponent implements OnInit, OnDestroy {
       if (Number(data.id)) {
         this.idCourse = Number(data.id);
         this.mode = 'Edit';
+        this.manageCourse = 'Edit course';
         return;
       }
       this.mode = 'Add';
+      this.manageCourse = 'New course';
       return;
     });
   }
@@ -45,7 +48,7 @@ export class CourseAddBodyComponent implements OnInit, OnDestroy {
 
   createNewCourse() {
     this.coursesService.courses.pipe(map(data => data)).subscribe(data => {
-      const coursesId = data.map(item => Number(item.id)).sort();
+      const coursesId = data.map(item => Number(item.id)).sort((a, b) => a - b);
       this.newIndex = coursesId[coursesId.length - 1] + 1;
     });
     this.course = new CourseModel(this.newIndex, '', false, new Date(), 0, '');

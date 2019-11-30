@@ -9,6 +9,7 @@ import { DurationPipe } from 'src/app/pipes/duration.pipe';
 import { CourseViewDirective } from 'src/app/directives/course-view.directive';
 import { MatDialog } from '@angular/material/dialog';
 import { of } from 'rxjs';
+import { Router } from '@angular/router';
 
 describe('CourseItemComponent', () => {
   let component: CourseItemComponent;
@@ -35,10 +36,14 @@ describe('CourseItemComponent', () => {
       declarations: [CourseItemComponent, CourseControlButtonsComponent, DurationPipe, CourseViewDirective],
       providers: [
         DurationPipe,
-        { 
+        {
           provide: MatDialog,
           useValue: {}
         },
+        {
+          provide: Router,
+          useValue: {}
+        }
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
