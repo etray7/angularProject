@@ -10,6 +10,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrderByPipe } from 'src/app/pipes/order-by.pipe';
 import { ModalAcceptComponent } from './components/modal-accept/modal-accept.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { SearchPipe } from 'src/app/pipes/search.pipe';
+import { CourseAddBodyComponent } from './components/course-add-page/components/course-add-body/course-add-body.component';
+import { CourseDateInputComponent } from './components/course-add-page/components/course-date-input/course-date-input.component';
+// tslint:disable-next-line: max-line-length
+import { CourseDurationInputComponent } from './components/course-add-page/components/course-duration-input/course-duration-input.component';
+import { CourseAuthorsInputComponent } from './components/course-add-page/components/course-authors-input/course-authors-input.component';
 
 
 @NgModule({
@@ -21,7 +27,12 @@ import { MatDialogModule } from '@angular/material/dialog';
     CourseViewDirective,
     DurationPipe,
     OrderByPipe,
-    ModalAcceptComponent
+    SearchPipe,
+    ModalAcceptComponent,
+    CourseAddBodyComponent,
+    CourseDateInputComponent,
+    CourseDurationInputComponent,
+    CourseAuthorsInputComponent
   ],
   imports: [
     CommonModule,

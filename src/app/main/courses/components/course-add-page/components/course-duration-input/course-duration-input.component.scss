@@ -1,0 +1,17 @@
+@import "../../../../../../../assets/scss/colors";
+
+.duration {
+  width: 40%;
+  display: inline-flex;
+}
+
+.hours {
+    font-family: SourceSansPro;
+    font-size: 14px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 0.22px;
+    color: $slate-grey;
+  }

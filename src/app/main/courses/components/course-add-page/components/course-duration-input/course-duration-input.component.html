@@ -1,0 +1,4 @@
+<div>
+    <input type="number" class="duration md-input form-control" required placeholder="Min." name="duration" [(ngModel)]="duration">
+    <span class="ml-3 hours" *ngIf="duration">{{duration | duration}}</span>
+</div>

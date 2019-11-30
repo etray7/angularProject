@@ -1,0 +1,72 @@
+@import "../../../../../../../assets/scss/colors";
+
+.add-form {
+  border-radius: 8px;
+  box-shadow: 0 1px 24px 0 rgba(18, 21, 35, 0.08);
+  background-color: #ffffff;
+
+  &-content {
+    padding: 15px 20px;
+    width: 100%;
+  }
+
+  .title {
+    width: 100%;
+  }
+
+  .info-form {
+    margin: 12px 0 8px 0;
+    display: flex;
+    justify-content: space-between;
+    font-family: SourceSansPro;
+    font-size: 14px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 0.22px;
+    color: $slate-grey;
+  }
+
+  .required {
+    font-family: SourceSansPro;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.19px;
+    text-align: right;
+    color: $battleship-grey;
+  }
+
+  .info-field {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+
+    .date,
+    .duration {
+      width: 40%;
+      display: inline-flex;
+    }
+  }
+}
+
+.closeBtn {
+  background: #d9dbe3;
+  color: #5b616f;
+  font-family: SourceSansPro;
+  font-size: 14px;
+  padding: 6px 16px;
+  border-radius: 4px;
+}
+
+.acceptBtn {
+  background: #9bc837;
+  font-family: SourceSansPro;
+  font-size: 14px;
+  color: white;
+  padding: 6px 16px;
+  border-radius: 4px;
+}

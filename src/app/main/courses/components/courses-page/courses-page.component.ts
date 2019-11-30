@@ -37,6 +37,10 @@ export class CoursesPageComponent implements OnInit {
     this.courseService.updateItem(item);
   }
 
+  removeCourse(id) {
+    this.courseService.removeItem(id);
+  }
+
   onFilterCourses(event) {
     const regExp = new RegExp(`${event.toUpperCase()}`);
     this.showCourses = this.search.transform(event, this.listOfCourses, regExp);
