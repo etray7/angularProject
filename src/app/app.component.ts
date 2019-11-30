@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AuthService } from './services/auth-service/auth.service';
 
 @Component({
@@ -10,10 +10,13 @@ export class AppComponent implements OnInit {
 
   isAuthenticated = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private cd: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.isAuthenticated = this.authService.isAuthenticated();
-    this.authService.sub.subscribe((value: boolean) => this.isAuthenticated = value);
+    this.authService.sub.subscribe((value: boolean) => {
+      this.isAuthenticated = value;
+      console.log(this.isAuthenticated);
+    });
   }
 }

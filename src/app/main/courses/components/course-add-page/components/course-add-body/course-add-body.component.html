@@ -1,32 +1,64 @@
-<div class="add-form d-flex align-self-center">
+<div class="container">
+  <div class="add-form d-flex align-self-center">
     <div class="add-form-content">
-        <h2>New course</h2>
-        <form>
-            <div>
-                <p class="info-form">Title: <span class="required">*required</span></p>
-                <input type="text" class="title md-input form-control" required placeholder="Some title..." name="title" [(ngModel)]="login">
-            </div>
-            <div>
-                <p class="info-form">Description: <span class="required">*required</span></p>
-                <textarea type="text" id="form8" name="description" required placeholder="Decription..." class="md-textarea form-control"></textarea>
-            </div>
-            <div class="info-field">
-                <p class="info-form date">Duration: <span class="required">*required</span></p>
-                <app-course-duration-input></app-course-duration-input>
-            </div>
-            <div class="info-field">
-                <p class="info-form date">Date: <span class="required">*required</span></p>
-                <app-course-date-input></app-course-date-input>
-            </div>
-            <div class="info-field">
-                <p class="info-form authors">Authors: <span class="required">*required</span></p>
-                <app-course-authors-input></app-course-authors-input>
-            </div>
-            <div class="d-flex justify-content-end align-items-center mt-2">
-                <button type="button" (click)="onCancel()" class="closeBtn">Cancel</button>
-                <button type="submit" (click)="onSave()" class="ml-2 acceptBtn">Save</button>
-            </div>
-        </form>
+      <h2>New course</h2>
+      <form>
+        <div>
+          <p class="info-form">
+            Title: <span class="required">*required</span>
+          </p>
+          <input
+            type="text"
+            class="title md-input form-control"
+            required
+            placeholder="Some title..."
+            name="title"
+            [(ngModel)]="title"
+            (change)="getNewTitle()"
+          />
+        </div>
+        <div>
+          <p class="info-form">
+            Description: <span class="required">*required</span>
+          </p>
+          <textarea
+            type="text"
+            id="form8"
+            [(ngModel)]="description"
+            (change)="getNewDescription()"
+            name="description"
+            required
+            placeholder="Decription..."
+            class="md-textarea form-control"
+          ></textarea>
+        </div>
+        <div class="info-field">
+          <p class="info-form date">
+            Duration: <span class="required">*required</span>
+          </p>
+          <app-course-duration-input [minDuration]="course.minDuration" (durationChange)="getNewDuration($event)"></app-course-duration-input>
+        </div>
+        <div class="info-field">
+          <p class="info-form date">
+            Date: <span class="required">*required</span>
+          </p>
+          <app-course-date-input [creationDate]="course.creationDate" (dateChange)="getNewDate($event)"></app-course-date-input>
+        </div>
+        <div class="info-field">
+          <p class="info-form authors">
+            Authors: <span class="required">*required</span>
+          </p>
+          <app-course-authors-input></app-course-authors-input>
+        </div>
+        <div class="d-flex justify-content-end align-items-center mt-2">
+          <button type="button" (click)="onCancel()" class="closeBtn">
+            Cancel
+          </button>
+          <button type="submit" (click)="onSave()" class="ml-2 acceptBtn">
+            Save
+          </button>
+        </div>
+      </form>
     </div>
+  </div>
 </div>
-    

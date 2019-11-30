@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CoursesService } from 'src/app/services/course-service/courses.service';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BreadcrumbsComponent implements OnInit {
 
-  constructor() { }
+  additional: string;
+
+  constructor(private coursesService: CoursesService) {
+  }
 
   ngOnInit() {
+    this.coursesService.currentCourse.subscribe(data => this.additional = data);
   }
 
 }

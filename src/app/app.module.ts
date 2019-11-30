@@ -11,11 +11,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { LoginPageModule } from './main/login-page/login-page.module';
+import { ErrorPageComponent } from './main/error-page/error-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
+    ErrorPageComponent,
   ],
   imports: [
     BrowserModule,

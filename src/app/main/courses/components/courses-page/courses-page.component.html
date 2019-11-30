@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <app-courses-search (filterCourseEmit)="onFilterCourses($event)"></app-courses-search>
   <div class="d-flex mt-4 justify-content-end">
-    <button class="add-course">
+    <button class="add-course" (click)="openAddCourse()">
       <i class="fa fa-plus mr-1"></i>
       <span class="add-course_text">Add course</span>
     </button>

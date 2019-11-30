@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CourseAuthorsInputComponent implements OnInit {
 
+  authors;
+
   constructor() { }
 
   ngOnInit() {

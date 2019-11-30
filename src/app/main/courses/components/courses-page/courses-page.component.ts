@@ -2,6 +2,7 @@ import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { Course } from 'src/app/domain/interfaces/course.interface';
 import { SearchPipe } from 'src/app/pipes/search.pipe';
 import { CoursesService } from 'src/app/services/course-service/courses.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-courses-page',
@@ -16,6 +17,7 @@ export class CoursesPageComponent implements OnInit {
 
   constructor(private search: SearchPipe,
               private courseService: CoursesService,
+              private router: Router,
   ) {}
 
   ngOnInit() {
@@ -39,6 +41,10 @@ export class CoursesPageComponent implements OnInit {
 
   removeCourse(id) {
     this.courseService.removeItem(id);
+  }
+
+  openAddCourse() {
+    this.router.navigateByUrl('/courses/new');
   }
 
   onFilterCourses(event) {

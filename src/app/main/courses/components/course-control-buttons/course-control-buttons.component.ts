@@ -2,6 +2,7 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { Course } from 'src/app/domain/interfaces/course.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalAcceptComponent } from '../modal-accept/modal-accept.component';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-course-control-buttons',
   templateUrl: './course-control-buttons.component.html',
@@ -14,7 +15,7 @@ export class CourseControlButtonsComponent implements OnInit {
   @Output()
   deleteCourse: EventEmitter<number> = new EventEmitter<number>();
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private router: Router) { }
 
   ngOnInit() {}
 
@@ -34,5 +35,11 @@ export class CourseControlButtonsComponent implements OnInit {
       }
       this.deleteCourse.emit(course.id);
     });
+  }
+
+  editCourse(course: Course) {
+    this.router.navigateByUrl(`courses/${course.id}`, {
+      queryParams: { ...course },
+    })
   }
 }

@@ -1,12 +1,7 @@
 <div class="app-body">
     <app-header [isAuthenticated]="isAuthenticated"></app-header>
     <main class="app-content d-flex justify-content-center align-items-center">
-        <div *ngIf="!isAuthenticated; else mainContent">
-            <app-login-form></app-login-form>
-        </div>
-        <ng-template #mainContent>
-            <router-outlet></router-outlet>
-        </ng-template>
+        <router-outlet></router-outlet>
     </main>
     <app-footer class="app-footer"></app-footer>
 </div>

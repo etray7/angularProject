@@ -40,7 +40,7 @@ import { CourseAuthorsInputComponent } from './components/course-add-page/compon
     ReactiveFormsModule,
     MatDialogModule,
   ],
-  exports: [CoursesPageComponent],
+  exports: [CoursesPageComponent, CourseAddBodyComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [ModalAcceptComponent]
 })
