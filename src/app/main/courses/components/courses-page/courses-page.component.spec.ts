@@ -4,6 +4,7 @@ import { CoursesPageComponent } from './courses-page.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { OrderByPipe } from 'src/app/pipes/order-by.pipe';
+import { Router } from '@angular/router';
 
 describe('CoursesPageComponent', () => {
   let component: CoursesPageComponent;
@@ -12,7 +13,13 @@ describe('CoursesPageComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ CoursesPageComponent, OrderByPipe ],
-      providers: [ OrderByPipe ],
+      providers: [
+        OrderByPipe,
+        {
+          provide: Router,
+          useValue: {}
+        }
+      ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
     })
     .compileComponents();

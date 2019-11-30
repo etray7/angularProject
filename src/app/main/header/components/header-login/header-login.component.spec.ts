@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeaderLoginComponent } from './header-login.component';
+import { Router } from '@angular/router';
 
 describe('HeaderLoginComponent', () => {
   let component: HeaderLoginComponent;
@@ -8,7 +9,8 @@ describe('HeaderLoginComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HeaderLoginComponent ]
+      declarations: [ HeaderLoginComponent ],
+      providers: [{ provide: Router, useValue: {} }]
     })
     .compileComponents();
   }));
