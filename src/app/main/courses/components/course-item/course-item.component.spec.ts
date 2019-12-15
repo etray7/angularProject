@@ -17,9 +17,9 @@ describe('CourseItemComponent', () => {
 
   const mockCourseItem = {
     id: 1,
-    title: 'Video Course 1. Name tag',
-    creationDate: new Date(),
-    minDuration: 30,
+    name: 'Video Course 1. Name tag',
+    date: new Date(),
+    length: 30,
     description: `Learn about where you can find course descriptions,
         what information they include, how they work, and details about
         various components of a course description.
@@ -28,7 +28,8 @@ describe('CourseItemComponent', () => {
         They're published both in course catalogs
         that outline degree requirements and in
         course schedules that contain descriptions
-        for all courses offered during a particular semester.`
+        for all courses offered during a particular semester.`,
+    authors: []
   };
 
   beforeEach(async(() => {
@@ -43,7 +44,7 @@ describe('CourseItemComponent', () => {
         {
           provide: Router,
           useValue: {}
-        }
+        },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
@@ -68,11 +69,11 @@ describe('CourseItemComponent', () => {
 
   it('should render course', () => {
     const nativeElement = fixture.nativeElement;
-    expect(nativeElement.querySelector('.course-title').textContent).toContain(mockCourseItem.title.toUpperCase());
+    expect(nativeElement.querySelector('.course-title').textContent).toContain(mockCourseItem.name.toUpperCase());
     expect(nativeElement.querySelector('[data-marker="creationDate"]').textContent)
-      .toContain(new DatePipe('en-US').transform(mockCourseItem.creationDate, 'd MMM, y'));
+      .toContain(new DatePipe('en-US').transform(mockCourseItem.date, 'd MMM, y'));
     expect(nativeElement.querySelector('[data-marker="minDuration"]').textContent.trim())
-      .toEqual(mockCourseItem.minDuration + 'min');
+      .toEqual(mockCourseItem.length + 'min');
     expect(nativeElement.querySelector('[data-marker="description"]').textContent)
       .toContain(mockCourseItem.description);
     expect(nativeElement.querySelectorAll('[data-marker="controlButtons"]')[0].children[0].children.length)

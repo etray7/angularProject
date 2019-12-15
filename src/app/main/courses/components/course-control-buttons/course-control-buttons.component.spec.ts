@@ -12,10 +12,10 @@ describe('CourseControlButtonsComponent', () => {
 
   const mockCourseItem = {
     id: 1,
-    title: 'Video Course 1. Name tag',
-    topRated: true,
-    creationDate: new Date(),
-    minDuration: 200,
+    name: 'Video Course 1. Name tag',
+    isTopRated: true,
+    date: new Date(),
+    length: 200,
     description: `Learn about where you can find course descriptions,
         what information they include, how they work, and details about
         various components of a course description.
@@ -24,7 +24,8 @@ describe('CourseControlButtonsComponent', () => {
         They're published both in course catalogs
         that outline degree requirements and in
         course schedules that contain descriptions
-        for all courses offered during a particular semester.`
+        for all courses offered during a particular semester.`,
+    authors: [],
   };
   const mockDialog = {
     open: () => {

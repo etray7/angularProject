@@ -7,7 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class CourseDateInputComponent implements OnInit {
 
-  @Input() creationDate;
+  @Input() creationDate: Date;
   @Output() dateChange: EventEmitter<Date> = new EventEmitter<Date>();
   date;
 
@@ -15,7 +15,11 @@ export class CourseDateInputComponent implements OnInit {
 
   ngOnInit() {
     if (this.creationDate) {
-      this.date = `${this.creationDate.getFullYear()}-${this.creationDate.getMonth() + 1}-${this.creationDate.getDate()}`;
+      const date = this.creationDate;
+      const year = date.getFullYear();
+      const month = (date.getMonth() + 1 >= 10) ? date.getMonth() + 1 : '0' + (date.getMonth() + 1);
+      const day = date.getDate();
+      this.date = `${year}-${month}-${day}`;
     }
   }
 

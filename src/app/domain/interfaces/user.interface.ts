@@ -1,5 +1,9 @@
+import { FullName } from './fullName.interface';
+
 export interface User {
     id: number;
-    firstName: string;
-    lastName: string;
+    token: string;
+    name: FullName;
+    login: string;
+    password: string;
 }

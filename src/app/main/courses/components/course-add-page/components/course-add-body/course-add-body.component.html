@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="course">
   <div class="add-form d-flex align-self-center">
     <div class="add-form-content">
       <h2>{{ manageCourse }}</h2>
@@ -36,13 +36,13 @@
           <p class="info-form date">
             Duration: <span class="required">*required</span>
           </p>
-          <app-course-duration-input [minDuration]="course.minDuration" (durationChange)="getNewDuration($event)"></app-course-duration-input>
+          <app-course-duration-input [minDuration]="course.length" (durationChange)="getNewDuration($event)"></app-course-duration-input>
         </div>
         <div class="info-field">
           <p class="info-form date">
             Date: <span class="required">*required</span>
           </p>
-          <app-course-date-input [creationDate]="course.creationDate" (dateChange)="getNewDate($event)"></app-course-date-input>
+          <app-course-date-input [creationDate]="date" (dateChange)="getNewDate($event)"></app-course-date-input>
         </div>
         <div class="info-field">
           <p class="info-form authors">

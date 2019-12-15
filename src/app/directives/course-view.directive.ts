@@ -20,9 +20,9 @@ export class CourseViewDirective implements OnInit {
 
   private daysBeetwen(): string {
     const specialDate = new Date(Number(this.currentDate) - this.twoWeeks);
-    if (this.course.creationDate < new Date() && this.course.creationDate >= specialDate) {
+    if (this.course.date < new Date() && this.course.date >= specialDate) {
       return 'solid 2px #07ff43';
-    } else if (this.course.creationDate > this.currentDate) {
+    } else if (this.course.date > this.currentDate) {
       return 'solid 2px #30b6dd';
     }
     return;

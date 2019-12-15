@@ -5,6 +5,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('CourseAddBodyComponent', () => {
   let component: CourseAddBodyComponent;
@@ -12,7 +13,7 @@ describe('CourseAddBodyComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ FormsModule ],
+      imports: [ FormsModule, HttpClientModule ],
       declarations: [ CourseAddBodyComponent ],
       providers: [
         {provide: ActivatedRoute, useValue: { params: of({}) } },

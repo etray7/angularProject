@@ -4,6 +4,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { LoginFormComponent } from './login-form.component';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('LoginFormComponent', () => {
   let component: LoginFormComponent;
@@ -12,7 +13,7 @@ describe('LoginFormComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ LoginFormComponent ],
-      imports: [ FormsModule ],
+      imports: [ FormsModule, HttpClientModule ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
       providers: [{ provide: Router, useValue: {} }]
     })

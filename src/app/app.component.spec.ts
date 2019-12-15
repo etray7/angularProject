@@ -5,6 +5,7 @@ import { CoursesModule } from './main/courses/courses.module';
 import { HeaderModule } from './main/header/header.module';
 import { FooterComponent } from './main/footer/footer.component';
 import { LoginPageModule } from './main/login-page/login-page.module';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -13,7 +14,8 @@ describe('AppComponent', () => {
         RouterTestingModule,
         CoursesModule,
         HeaderModule,
-        LoginPageModule
+        LoginPageModule,
+        HttpClientModule
       ],
       declarations: [
         AppComponent,

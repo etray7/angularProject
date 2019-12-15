@@ -17,14 +17,21 @@ export class LoginFormComponent implements OnInit {
     private router: Router,
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.authService.isAuthenticated()) {
+      this.router.navigateByUrl('/courses');
+    }
+  }
 
   onSubmit() {
     this.authService.login({
       login: this.login,
       password: this.password,
-    });
-    this.router.navigateByUrl('/courses');
-    console.log('Logged in successfully');
+    }).subscribe(
+      () => {
+        this.router.navigateByUrl('/courses');
+        console.log('Logged in successfully');
+      },
+      (error) => console.error(error.error));
   }
 }

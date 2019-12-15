@@ -19,6 +19,7 @@ export class CourseAddBodyComponent implements OnInit, OnDestroy {
   idCourse: number;
   course: Course;
   unsubscribe: any;
+  date: string | Date;
 
   constructor(
     private router: ActivatedRoute,
@@ -47,12 +48,12 @@ export class CourseAddBodyComponent implements OnInit, OnDestroy {
   }
 
   createNewCourse() {
-    this.coursesService.courses.pipe(map(data => data)).subscribe(data => {
+    this.coursesService.getAllCourses().subscribe(data => {
       const coursesId = data.map(item => Number(item.id)).sort((a, b) => a - b);
       this.newIndex = coursesId[coursesId.length - 1] + 1;
     });
-    this.course = new CourseModel(this.newIndex, '', false, new Date(), 0, '');
-    this.title = this.course.title;
+    this.course = new CourseModel(this.newIndex, '', false, new Date(), 0, '', []);
+    this.title = this.course.name;
     this.description = this.course.description;
     this.coursesService.currentCourse.emit('New course');
   }
@@ -64,17 +65,21 @@ export class CourseAddBodyComponent implements OnInit, OnDestroy {
   }
 
   getCourseItem() {
-      this.course = {...this.coursesService.getItemById(this.idCourse)[0]};
-      this.title = this.course.title;
+    this.coursesService.getItemById(this.idCourse).subscribe(course => {
+      this.course = course;
+      this.date = new Date(this.course.date);
+      this.title = this.course.name;
       this.description = this.course.description;
       this.coursesService.currentCourse.emit(this.title);
+    });
   }
 
   onSave() {
     if (this.mode === 'Edit') {
-      this.coursesService.updateItem(this.course);
+      console.log(this.course);
+      this.coursesService.updateItem(this.idCourse, this.course).subscribe(item => item);
     } else if (this.mode === 'Add') {
-      this.coursesService.addCourse(this.course);
+      this.coursesService.addCourse(this.course).subscribe(item => item);
     }
     this.route.navigateByUrl('/courses');
     console.log('Save course');
@@ -86,11 +91,11 @@ export class CourseAddBodyComponent implements OnInit, OnDestroy {
   }
 
   getNewDate(date) {
-    this.course.creationDate = date;
+    this.course.date = date;
   }
 
   getNewDuration(duration: number) {
-    this.course.minDuration = duration;
+    this.course.length = duration;
   }
 
   getNewDescription() {
@@ -98,6 +103,6 @@ export class CourseAddBodyComponent implements OnInit, OnDestroy {
   }
 
   getNewTitle() {
-    this.course.title = this.title;
+    this.course.name = this.title;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Course } from 'src/app/domain/interfaces/course.interface';
 import { SearchPipe } from 'src/app/pipes/search.pipe';
 import { CoursesService } from 'src/app/services/course-service/courses.service';
@@ -8,39 +8,40 @@ import { Router } from '@angular/router';
   selector: 'app-courses-page',
   templateUrl: './courses-page.component.html',
   styleUrls: ['./courses-page.component.scss'],
-  providers: [SearchPipe]
+  // providers: [SearchPipe]
 })
 export class CoursesPageComponent implements OnInit {
 
   public showCourses: Array<Course>;
   private listOfCourses;
 
-  constructor(private search: SearchPipe,
-              private courseService: CoursesService,
+  constructor(private courseService: CoursesService,
               private router: Router,
+    // private search: SearchPipe,
   ) {}
 
   ngOnInit() {
-    this.courseService.getList().subscribe(courses => {
-      this.listOfCourses = courses;
-      this.showCourses = this.listOfCourses;
-    });
+    this.courseService.getSomeCourses(0, 5)
+      .subscribe((courses) => {
+        this.listOfCourses = courses;
+        this.showCourses = this.listOfCourses;
+      });
   }
 
-  addCourse(item: Course) {
-    this.courseService.addCourse(item);
+  loadMoreCourses() {
+    this.courseService.getSomeCourses(0, this.listOfCourses.length + 5)
+      .subscribe(courses => {
+        this.listOfCourses = courses;
+        this.showCourses = this.listOfCourses;
+      });
   }
 
   getItemById(id: number) {
     this.courseService.getItemById(id);
   }
 
-  updateCourse(item: Course) {
-    this.courseService.updateItem(item);
-  }
-
   removeCourse(id) {
-    this.courseService.removeItem(id);
+    this.courseService.removeItem(id).subscribe(item => item);
   }
 
   openAddCourse() {
@@ -48,7 +49,13 @@ export class CoursesPageComponent implements OnInit {
   }
 
   onFilterCourses(event) {
-    const regExp = new RegExp(`${event.toUpperCase()}`);
-    this.showCourses = this.search.transform(event, this.listOfCourses, regExp);
+    // previous method
+    // const regExp = new RegExp(`${event.toUpperCase()}`);
+    // this.showCourses = this.search.transform(event, this.listOfCourses, regExp);
+    if (event.length > 0) {
+      this.courseService.searchItems(event).subscribe(courses => this.showCourses = courses);
+      return;
+    }
+    this.showCourses = this.listOfCourses;
   }
 }

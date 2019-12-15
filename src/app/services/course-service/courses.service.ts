@@ -1,6 +1,8 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Course } from 'src/app/domain/interfaces/course.interface';
+import { HttpClient } from '@angular/common/http';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -8,66 +10,45 @@ import { Course } from 'src/app/domain/interfaces/course.interface';
 export class CoursesService {
 
   currentCourse: EventEmitter<any> = new EventEmitter<any>();
+  private courseUrl = 'http://localhost:3004/courses';
 
-  courseList: Array<Course> = [
-    {
-      id: 1,
-      title: 'Video Course 1. Name tag',
-      topRated: true,
-      creationDate: new Date(),
-      minDuration: 180,
-      description: `Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester.`
-    },
-    {
-      id: 2,
-      title: 'Video Course 1. Name tag',
-      topRated: false,
-      creationDate: new Date('12/31/2019'),
-      minDuration: 345,
-      description: `Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester.`
-    },
-    {
-      id: 3,
-      title: 'Video Course 2. Angular course',
-      topRated: false,
-      creationDate: new Date('01/02/2018'),
-      minDuration: 50,
-      description: `Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester.`
-    }
-  ];
+  constructor(private http: HttpClient) { }
 
-  courses = new BehaviorSubject(this.courseList);
-  getCourses = this.courses.asObservable();
-
-  constructor() { }
-
-  getList(): Observable<Course[]> {
-    return this.getCourses;
+  getAllCourses(): Observable<Course[]> {
+    return this.http.get<Course[]>(this.courseUrl).pipe(tap(courses => courses));
   }
 
-  addCourse(item: Course): void {
-    this.courseList = [...this.courseList, item];
-    this.courses.next(this.courseList);
-  }
-
-  getItemById(id: number): Course[] {
-    return this.courseList.filter((item: Course) => item.id === id);
-  }
-
-  updateItem(item: Course): void {
-    this.courseList = this.courseList.map((course: Course) => {
-      if (course.id === item.id) {
-        course = item;
-        return course;
+  getSomeCourses(start, count) {
+    return this.http.get(this.courseUrl, {
+      params: {
+        start,
+        count,
       }
-      return course;
     });
-    this.courses.next(this.courseList);
   }
 
-  removeItem(id: number): void {
-    this.courseList = this.courseList.filter((item: Course) => item.id !== id);
-    this.courses.next(this.courseList);
+  addCourse(item: Course) {
+    return this.http.post<Course>(this.courseUrl, item);
+  }
+
+  getItemById(id: number): Observable<Course> {
+    return this.http.get<Course>(`${this.courseUrl}/${id}`);
+  }
+
+  updateItem(id: number, item: Course) {
+    return this.http.patch<Course>(`${this.courseUrl}/${id}`, item);
+  }
+
+  removeItem(id: number) {
+    return this.http.delete<Course>(`${this.courseUrl}/${id}`);
+  }
+
+  searchItems(query: string) {
+    return this.http.get<Course[]>(this.courseUrl, {
+      params: {
+        textFragment: query,
+      }
+    });
   }
 
 }

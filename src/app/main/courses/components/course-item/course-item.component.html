@@ -1,24 +1,24 @@
 <section appCourseView [course]="course"
          class="course mt-2"
-         [ngClass]="{ 'topRated': course.topRated }">
+         [ngClass]="{ 'topRated': course.isTopRated }">
   <div class="container">
     <div class="row">
       <div class="col-lg-9 col-md-9">
         <div class="d-flex align-items-center justify-content-between">
           <div>
             <h2 class="course-title">
-              {{ course.title | uppercase }}
+              {{ course.name | uppercase }}
               <i *ngIf="course.topRated" class="fas fa-star star"></i>
             </h2>
           </div>
           <div>
             <span data-marker='minDuration' class="course-info">
               <i class="far fa-clock"></i>
-              {{ course.minDuration | duration }}
+              {{ course.length | duration }}
             </span>
             <span data-marker='creationDate' class="course-info ml-3">
               <i class="fas fa-calendar-alt"></i>
-              {{ course.creationDate | date: "d MMM, y" }}
+              {{ course.date | date: "d MMM, y" }}
             </span>
           </div>
         </div>

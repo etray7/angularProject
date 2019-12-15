@@ -8,14 +8,14 @@
   </div>
 
   <section class="mt-2">
-    <ng-container *ngIf="showCourses.length > 0; else noMessage">
+    <ng-container *ngIf="showCourses; else noMessage">
       <app-course-item data-marker="courses"
-                       *ngFor="let courseItem of showCourses | orderBy: 'creationDate'"
+                       *ngFor="let courseItem of showCourses | orderBy: 'date'"
                        [course]="courseItem"
                        (deleteCourseItem)="removeCourse($event)">
       </app-course-item>
       <div class="mt-2">
-        <button class="load-more-btn">
+        <button (click)="loadMoreCourses()" class="load-more-btn">
           <span>
             Load more
           </span>
