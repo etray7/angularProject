@@ -6,6 +6,8 @@ import { HeaderModule } from './main/header/header.module';
 import { FooterComponent } from './main/footer/footer.component';
 import { LoginPageModule } from './main/login-page/login-page.module';
 import { HttpClientModule } from '@angular/common/http';
+import { SpinnerComponent } from './main/spinner/spinner.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -20,7 +22,9 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         FooterComponent,
+        SpinnerComponent,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
   }));
 

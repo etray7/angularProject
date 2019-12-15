@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { LoginRequest } from 'src/app/domain/interfaces/loginRequest.interface';
 import { map, tap } from 'rxjs/operators';
 import { User } from 'src/app/domain/interfaces/user.interface';
+import { SpinnerService } from '../spinner-service/spinner.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class AuthService {
   loginCheck = new Subject();
   sub = this.loginCheck.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private spinnerService: SpinnerService) { }
 
   login(user: LoginRequest): Observable<any> {
     return this.http.post<Observable<any>>(`${this.authUrl}/login`, user).pipe(
@@ -22,6 +23,7 @@ export class AuthService {
         localStorage.setItem('token', JSON.stringify(item));
           // Math.random().toString(36).substr(2) if in future need to generate token
         this.loginCheck.next(true);
+
         return item;
       })
     );
@@ -41,8 +43,8 @@ export class AuthService {
     return false;
   }
 
-  getUserInfo(token): any {
-    return this.http.post<Observable<any>>(`${this.authUrl}/userinfo`, token).pipe(
+  getUserInfo(token): Observable<User> {
+    return this.http.post<User>(`${this.authUrl}/userinfo`, token).pipe(
       tap((item: any) => {
         return item;
       })

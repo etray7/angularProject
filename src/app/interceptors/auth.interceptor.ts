@@ -6,11 +6,14 @@ import {
     HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { SpinnerService } from '../services/spinner-service/spinner.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-    constructor() {}
+    constructor(private spinnerService: SpinnerService) {}
     intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+        this.spinnerService.needSpinner();
+
         if (!request.url.includes('http://localhost:3004/auth/login')) {
             request = request.clone({
                 setHeaders: {
@@ -19,6 +22,7 @@ export class TokenInterceptor implements HttpInterceptor {
             });
         }
 
+        setTimeout(() => this.spinnerService.stopSpinner(), 500);
         return next.handle(request);
     }
 }

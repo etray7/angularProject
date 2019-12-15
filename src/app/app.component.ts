@@ -1,5 +1,6 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth-service/auth.service';
+import { SpinnerService } from './services/spinner-service/spinner.service';
 
 @Component({
   selector: 'app-root',
@@ -9,14 +10,19 @@ import { AuthService } from './services/auth-service/auth.service';
 export class AppComponent implements OnInit {
 
   isAuthenticated = false;
+  isLoading;
 
-  constructor(private authService: AuthService, private cd: ChangeDetectorRef) {}
+  constructor(private authService: AuthService, private spinnerService: SpinnerService) {}
 
   ngOnInit() {
     this.isAuthenticated = this.authService.isAuthenticated();
     this.authService.sub.subscribe((value: boolean) => {
       this.isAuthenticated = value;
       console.log(this.isAuthenticated);
+    });
+
+    this.spinnerService.isLoadingSubscriber.subscribe((item: boolean) => {
+      this.isLoading = item;
     });
   }
 }

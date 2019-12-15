@@ -1,4 +1,4 @@
-<form [formGroup]="searchForm" class="search-field" (ngSubmit)="onFilterCourses()">
+<form [formGroup]="searchForm" class="search-field" (keyup.enter)="onFilterCourses()">
   <div class="search-icon">
     <img
       src="../../../../../assets/img/ic-search.png"
@@ -16,7 +16,4 @@
     placeholder="Text to search"
     aria-label="Search"
   />
-  <button class="courses-search_btn" for="courses">
-    Search
-  </button>
 </form>  

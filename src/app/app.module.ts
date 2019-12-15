@@ -10,15 +10,19 @@ import { FooterComponent } from './main/footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoginPageModule } from './main/login-page/login-page.module';
 import { ErrorPageComponent } from './main/error-page/error-page.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/auth.interceptor';
+import { SpinnerComponent } from './main/spinner/spinner.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
     ErrorPageComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,6 +33,7 @@ import { TokenInterceptor } from './interceptors/auth.interceptor';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatDialogModule,
+    MatProgressSpinnerModule,
     LoginPageModule,
     HttpClientModule,
   ],
