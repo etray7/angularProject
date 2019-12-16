@@ -2,7 +2,7 @@
   <div class="container d-inline-flex justify-content-between align-items-center flex-wrap">
     <app-fake-logo></app-fake-logo>
     <ng-container *ngIf="isAuthenticated">
-      <app-header-login></app-header-login>
+      <app-header-login [user]="user"></app-header-login>
     </ng-container>
   </div>
 </div>

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Course } from 'src/app/domain/interfaces/course.interface';
 import { SearchPipe } from 'src/app/pipes/search.pipe';
 import { CoursesService } from 'src/app/services/course-service/courses.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-courses-page',
@@ -10,10 +11,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./courses-page.component.scss'],
   // providers: [SearchPipe]
 })
-export class CoursesPageComponent implements OnInit {
+export class CoursesPageComponent implements OnInit, OnDestroy {
 
   public showCourses: Array<Course>;
   private listOfCourses;
+  subscription: Subscription;
 
   constructor(private courseService: CoursesService,
               private router: Router,
@@ -21,7 +23,15 @@ export class CoursesPageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.courseService.getSomeCourses(0, 5)
+    this.loadCourses();
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  loadCourses(itemsLength = 5) {
+    this.subscription = this.courseService.getSomeCourses(0, itemsLength)
       .subscribe((courses) => {
         this.listOfCourses = courses;
         this.showCourses = this.listOfCourses;
@@ -29,7 +39,7 @@ export class CoursesPageComponent implements OnInit {
   }
 
   loadMoreCourses() {
-    this.courseService.getSomeCourses(0, this.listOfCourses.length + 5)
+    this.subscription = this.courseService.getSomeCourses(0, this.listOfCourses.length + 5)
       .subscribe(courses => {
         this.listOfCourses = courses;
         this.showCourses = this.listOfCourses;
@@ -41,7 +51,10 @@ export class CoursesPageComponent implements OnInit {
   }
 
   removeCourse(id) {
-    this.courseService.removeItem(id).subscribe(item => item);
+    this.courseService.removeItem(id).subscribe(item => {
+      this.loadCourses(this.showCourses.length);
+      return item;
+    });
   }
 
   openAddCourse() {

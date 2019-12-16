@@ -12,8 +12,8 @@ import { SpinnerService } from '../services/spinner-service/spinner.service';
 export class TokenInterceptor implements HttpInterceptor {
     constructor(private spinnerService: SpinnerService) {}
     intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-        this.spinnerService.needSpinner();
 
+        this.spinnerService.needSpinner();
         if (!request.url.includes('http://localhost:3004/auth/login')) {
             request = request.clone({
                 setHeaders: {

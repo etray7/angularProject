@@ -1,4 +1,4 @@
 export interface FullName {
-    firstName: string;
-    lastName: string;
+    first: string;
+    last: string;
 }

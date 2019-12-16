@@ -7,7 +7,7 @@
     "
     class="ic_user"
   />
-  <span class="user-enter">User login</span>
+  <span *ngIf="user" class="user-enter">{{user.name.first}} {{user.name.last}}</span>
   <img
     src="../../../../../assets/img/ic-exit.png"
     srcset="

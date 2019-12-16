@@ -10,7 +10,7 @@ import { SpinnerService } from './services/spinner-service/spinner.service';
 export class AppComponent implements OnInit {
 
   isAuthenticated = false;
-  isLoading;
+  isLoading = false;
 
   constructor(private authService: AuthService, private spinnerService: SpinnerService) {}
 
