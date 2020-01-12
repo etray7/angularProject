@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Subject, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SpinnerService {
 
-  isLoading = new BehaviorSubject(false);
+  isLoading = new BehaviorSubject(true);
   isLoadingSubscriber = this.isLoading.asObservable();
 
   constructor() { }

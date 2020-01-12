@@ -1,9 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursesService } from 'src/app/services/course-service/courses.service';
-import { tap, map } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { CourseModel } from 'src/app/domain/models/Course.model';
 import { Course } from 'src/app/domain/interfaces/course.interface';
+import { State, CourseState } from 'src/app/state';
+import { Store, select } from '@ngrx/store';
+import { getAllCourses, editCourse } from 'src/app/state/courses/courses.actions';
+import { selectCourses } from 'src/app/state/courses/courses.selector';
 @Component({
   selector: 'app-course-add-body',
   templateUrl: './course-add-body.component.html',
@@ -22,9 +26,10 @@ export class CourseAddBodyComponent implements OnInit, OnDestroy {
   date: string | Date;
 
   constructor(
-    private router: ActivatedRoute,
     public coursesService: CoursesService,
-    private route: Router
+    private router: ActivatedRoute,
+    private route: Router,
+    private store: Store<State>,
   ) {
     this.unsubscribe = this.router.params.pipe(tap(data => data)).subscribe(data => {
       if (Number(data.id)) {
@@ -48,8 +53,9 @@ export class CourseAddBodyComponent implements OnInit, OnDestroy {
   }
 
   createNewCourse() {
-    this.coursesService.getAllCourses().subscribe(data => {
-      const coursesId = data.map(item => Number(item.id)).sort((a, b) => a - b);
+    this.store.dispatch(getAllCourses());
+    this.store.pipe(select(selectCourses)).subscribe(data => {
+      const coursesId = [...data.allCourses].map(item => Number(item.id)).sort((a, b) => a - b);
       this.newIndex = coursesId[coursesId.length - 1] + 1;
     });
     this.course = new CourseModel(this.newIndex, '', false, new Date(), 0, '', []);
@@ -65,18 +71,24 @@ export class CourseAddBodyComponent implements OnInit, OnDestroy {
   }
 
   getCourseItem() {
-    this.coursesService.getItemById(this.idCourse).subscribe(course => {
-      this.course = course;
-      this.date = new Date(this.course.date);
-      this.title = this.course.name;
-      this.description = this.course.description;
-      this.coursesService.currentCourse.emit(this.title);
+    this.store.dispatch(getAllCourses());
+    this.store.dispatch(editCourse({currentId: this.idCourse}));
+    this.store.pipe(
+      select(selectCourses),
+    ).subscribe((courses: CourseState) => {
+      if (courses.currentCourse) {
+        const currentCourse = courses.currentCourse;
+        this.course = {...currentCourse};
+        this.date = new Date(this.course.date);
+        this.title = this.course.name;
+        this.description = this.course.description;
+        this.coursesService.currentCourse.emit(this.title);
+      }
     });
   }
 
   onSave() {
     if (this.mode === 'Edit') {
-      console.log(this.course);
       this.coursesService.updateItem(this.idCourse, this.course).subscribe(item => item);
     } else if (this.mode === 'Add') {
       this.coursesService.addCourse(this.course).subscribe(item => item);

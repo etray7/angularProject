@@ -4,6 +4,10 @@ import { SearchPipe } from 'src/app/pipes/search.pipe';
 import { CoursesService } from 'src/app/services/course-service/courses.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { State } from 'src/app/state';
+import { getCourses, removeCourse, loadMoreCourses } from 'src/app/state/courses/courses.actions';
+import { selectCourses } from 'src/app/state/courses/courses.selector';
 
 @Component({
   selector: 'app-courses-page',
@@ -15,10 +19,11 @@ export class CoursesPageComponent implements OnInit, OnDestroy {
 
   public showCourses: Array<Course>;
   private listOfCourses;
-  subscription: Subscription;
+  unsubscribe: Subscription;
 
   constructor(private courseService: CoursesService,
               private router: Router,
+              private store: Store<State>,
     // private search: SearchPipe,
   ) {}
 
@@ -27,23 +32,19 @@ export class CoursesPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.unsubscribe.unsubscribe();
   }
 
-  loadCourses(itemsLength = 5) {
-    this.subscription = this.courseService.getSomeCourses(0, itemsLength)
-      .subscribe((courses) => {
-        this.listOfCourses = courses;
-        this.showCourses = this.listOfCourses;
-      });
+  loadCourses() {
+    this.store.dispatch(getCourses());
+    this.unsubscribe = this.store.pipe(select(selectCourses)).subscribe((courses) => {
+      this.listOfCourses = [...courses.courses];
+      this.showCourses = this.listOfCourses;
+    });
   }
 
   loadMoreCourses() {
-    this.subscription = this.courseService.getSomeCourses(0, this.listOfCourses.length + 5)
-      .subscribe(courses => {
-        this.listOfCourses = courses;
-        this.showCourses = this.listOfCourses;
-      });
+    this.store.dispatch(loadMoreCourses());
   }
 
   getItemById(id: number) {
@@ -52,7 +53,7 @@ export class CoursesPageComponent implements OnInit, OnDestroy {
 
   removeCourse(id) {
     this.courseService.removeItem(id).subscribe(item => {
-      this.loadCourses(this.showCourses.length);
+      this.store.dispatch(removeCourse());
       return item;
     });
   }

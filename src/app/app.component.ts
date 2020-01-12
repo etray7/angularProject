@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef, AfterViewChecked } from '@angular/core';
 import { AuthService } from './services/auth-service/auth.service';
 import { SpinnerService } from './services/spinner-service/spinner.service';
 
@@ -7,22 +7,30 @@ import { SpinnerService } from './services/spinner-service/spinner.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewChecked {
 
-  isAuthenticated = false;
+  isAuthenticated;
   isLoading = false;
 
-  constructor(private authService: AuthService, private spinnerService: SpinnerService) {}
+  constructor(
+    private authService: AuthService,
+    private spinnerService: SpinnerService,
+    private cdRef: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.isAuthenticated = this.authService.isAuthenticated();
-    this.authService.sub.subscribe((value: boolean) => {
-      this.isAuthenticated = value;
-      console.log(this.isAuthenticated);
+    this.authService.isAuthenticated().subscribe((item) => {
+      if (item.user.fakeToken) {
+        this.isAuthenticated = true;
+      } else {
+        this.isAuthenticated = false;
+      }
     });
+  }
 
+  ngAfterViewChecked() {
     this.spinnerService.isLoadingSubscriber.subscribe((item: boolean) => {
       this.isLoading = item;
+      this.cdRef.detectChanges();
     });
   }
 }

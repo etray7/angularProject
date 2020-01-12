@@ -16,6 +16,13 @@ import { ErrorPageComponent } from './main/error-page/error-page.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/auth.interceptor';
 import { SpinnerComponent } from './main/spinner/spinner.component';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './state';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { CoursesEffect } from './state/courses/courses.effects';
+import { UserEffect } from './state/user/user.effects';
 
 @NgModule({
   declarations: [
@@ -36,6 +43,18 @@ import { SpinnerComponent } from './main/spinner/spinner.component';
     MatProgressSpinnerModule,
     LoginPageModule,
     HttpClientModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true
+      }
+    }),
+    EffectsModule.forRoot([
+      CoursesEffect,
+      UserEffect,
+    ]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [
     {

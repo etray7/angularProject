@@ -18,9 +18,11 @@ export class LoginFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.authService.isAuthenticated()) {
-      this.router.navigateByUrl('/courses');
-    }
+    this.authService.isAuthenticated().subscribe((item) => {
+      if (item.user.fakeToken) {
+        this.router.navigateByUrl('/courses');
+      }
+    });
   }
 
   onSubmit() {
