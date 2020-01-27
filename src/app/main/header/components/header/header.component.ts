@@ -20,12 +20,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     const token = JSON.parse(localStorage.getItem('token')) || false;
     if (token) {
-      // this.store.dispatch(getToken({token}));
-      // this.store.pipe(select(selectUser)).subscribe((item) => {
-      //   console.log(item);
-      //   this.user = item.user;
-      //   this.store.dispatch(getCurrentUser({ user: item.user }));
-      // });
       this.authService.getUserInfo(token).subscribe((item) => {
         this.user = item;
         this.store.dispatch(getCurrentUser({user: item}));

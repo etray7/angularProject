@@ -1,1 +1,25 @@
-<input type="text" class="md-input form-control" name="authors" required [(ngModel)]="authors">
+<mat-form-field class="author-list md-input form-control">
+  <mat-chip-list #authorList aria-label="author selection">
+    <mat-chip
+      *ngFor="let author of authors"
+      [selectable]="selectable"
+      [removable]="removable"
+      (removed)="remove(author)"
+    >
+      {{ author.name }}
+      <mat-icon matChipRemove *ngIf="removable">x</mat-icon>
+    </mat-chip>
+    <input
+      placeholder="Add author..."
+      [matChipInputFor]="authorList"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      [matChipInputAddOnBlur]="addOnBlur"
+      (matChipInputTokenEnd)="add($event)"
+      type="text"
+      class="md-input form-control authors-field"
+      name="authors"
+      required
+      (input)="onChange(authors)"
+    />
+  </mat-chip-list>
+</mat-form-field>

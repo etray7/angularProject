@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrderByPipe } from 'src/app/pipes/order-by.pipe';
 import { ModalAcceptComponent } from './components/modal-accept/modal-accept.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatChipsModule } from '@angular/material';
 import { SearchPipe } from 'src/app/pipes/search.pipe';
 import { CourseAddBodyComponent } from './components/course-add-page/components/course-add-body/course-add-body.component';
 import { CourseDateInputComponent } from './components/course-add-page/components/course-date-input/course-date-input.component';
@@ -39,6 +40,7 @@ import { CourseAuthorsInputComponent } from './components/course-add-page/compon
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
+    MatChipsModule,
   ],
   exports: [CoursesPageComponent, CourseAddBodyComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

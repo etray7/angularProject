@@ -1,1 +1,9 @@
-<input type="date" class="date md-input form-control" name="date" required [(ngModel)]="date" (change)="onDateChange()">
+<input
+  type="date"
+  class="date md-input form-control"
+  name="date"
+  required
+  [value]="date"
+  (change)="onDateChange()"
+  (input)="onChange($event.target.value)"
+/>
